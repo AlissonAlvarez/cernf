@@ -1,0 +1,138 @@
+<aside>
+    <button class="nav-button headphones" onclick="toggleAccessibilityPanel()" title="Abrir opciones de accesibilidad">🎧</button>
+    <div class="accessibility-panel" id="accessibilityPanel">
+        <button class="close-panel" onclick="closeAccessibilityPanel()" title="Cerrar panel">✖</button>
+        <h3>Accesibilidad</h3>
+        <div class="profiles">
+            <select onchange="applyProfile(this.value)">
+                <option value="">Seleccionar perfil de accesibilidad</option>
+                <option value="motor-disability">Discapacidad Motora</option>
+                <option value="blindness">Ceguera</option>
+                <option value="color-blindness">Daltonismo</option>
+                <option value="dyslexia">Dislexia</option>
+                <option value="low-vision">Visión baja</option>
+                <option value="cognitive">Cognitivo y aprendizaje</option>
+                <option value="seizures">Convulsiones y epilépticos</option>
+                <option value="adhd">TDAH</option>
+            </select>
+        </div>
+        <div class="accessibility-options">
+            <button onclick="readSelection()">
+                <span class="icon">📋</span> Leer selección
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="readPage()">
+                <span class="icon">📢</span> Leer página
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleContrast()">
+                <span class="icon">🌗</span> Contraste +
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleSmartContrast()">
+                <span class="icon">🔆</span> Contraste inteligente
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleHighlightLinks()">
+                <span class="icon">🔗</span> Resaltar enlaces
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleBiggerText()">
+                <span class="icon">🔤</span> Agrandar texto
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleTextSpacing()">
+                <span class="icon">↔</span> Espaciado de texto
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="togglePauseAnimations()">
+                <span class="icon">⏸️</span> Detener animaciones
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleHideImages()">
+                <span class="icon">🖼️</span> Ocultar imágenes
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleDyslexiaFont()">
+                <span class="icon">📝</span> Apto para dislexia
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleBiggerCursor()">
+                <span class="icon">🖱️</span> Cursor
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleTooltips()">
+                <span class="icon">💬</span> Información
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="togglePageStructure()">
+                <span class="icon">📄</span> Estructura de la página
+                <span class="steps">
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleLineHeight()">
+                <span class="icon">↕</span> Altura de la línea
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleTextAlign()">
+                <span class="icon">📐</span> Texto alineado
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="toggleSaturation()">
+                <span class="icon">🎨</span> Saturación
+                <span class="steps">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                </span>
+            </button>
+            <button onclick="resetAccessibility()" class="reset-btn">
+                <span class="icon">🔄</span> Restablecer configuraciones
+            </button>
+        </div>
+    </div>
+</aside>

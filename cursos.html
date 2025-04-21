@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Centro Educativo Rural Nicolás de Federman</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.1/open-dyslexic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="asside.css">
+    <link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Open Sans", sans-serif;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        /* Header Styles */
+        header {
+            position: relative;
+            width: 100%;
+        }
+
+        h2 {
+            font-family: 'Roboto Medium', sans-serif;
+            font-size: 40px;
+            font-weight: 400;
+        }
+
+        .logo img {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 200px;
+            z-index: 1;
+        }
+
+        .header-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Navigation Styles */
+        nav {
+            position: relative;
+            background-color: #42A5F5;
+            padding: 15px 0;
+            top: -5px;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 8px 20px;
+            padding-bottom: 16px;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            transition: background-color 0.3s;
+            transition: ease 0.4s;
+        }
+
+        nav ul li a.active {
+            background-color: #F5A623;
+            color: #333;
+        }
+
+        nav ul li a:hover {
+            background-color: #F5A623;
+            color: #333;
+        }
+
+        /* Main Content Styles */
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Courses Section Styles */
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 30px;
+        }
+
+        .course-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-header {
+            background-color: #4A90E2;
+            color: white;
+            padding: 15px 20px;
+        }
+
+        .course-header h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-image {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-info p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .course-lessons {
+            margin-top: 15px;
+        }
+
+        .lesson-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Login Prompt Styles */
+        .login-message {
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            margin: 50px auto;
+            max-width: 600px;
+        }
+
+        .login-message h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-message p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .login-btn {
+            background-color: #F5A623;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #e6951a;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #45AFFF;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 30px 10px;
+        }
+
+
+        .footer-navigate {
+            display: flex;
+            gap: 10px;
+            padding-bottom: 20px;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        svg{
+            width: 25px;
+            fill: #ffffff;
+        }
+
+        .footer-network {
+            display: flex;
+        }
+
+        .footer-network svg {
+            width: 40px;
+        }
+
+        .footer-container div {
+            text-align: center;
+        }
+
+        .footer-container img {
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .footer-container a {
+            margin: 0 10px;
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+
+        .footer-container a:not(.social-link) {
+            font-size: 16px;
+            display: block;
+            margin: 5px 0;
+            text-align: left;
+        }
+
+        .footer-container h3 {
+            font-family: 'Roboto Medium', sans-serif;
+            font-size: 25px;
+            font-weight: 400;
+        }
+
+        .footer-container p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .footer-section iframe {
+            width: 400px;
+            height: 180px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .footer-section h3 {
+            padding-bottom: 20px;
+        }
+
+        .footer-bottom {
+            background-color: #FF9100;
+            text-align: center;
+            padding: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="img/escudo.png" alt="Logo Centro Educativo Rural Nicolás de Federman">
+        </div>
+        <div class="header-image">
+            <img src="img/niños.jpg" alt="Niños felices">
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="institucion.html">Institución</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="cursos.html" class="active">Cursos</a></li>
+            <li><a href="cuenta.html">Cuenta</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div id="courses-content">
+            <!-- Courses List (shown when logged in) -->
+            <div class="courses-container" id="courses-list" style="display: none;">
+                <h1 style="grid-column: 1 / -1; text-align: center;">Mis Cursos</h1>
+                <!-- Courses will be dynamically inserted here -->
+            </div>
+            
+            <!-- Login Prompt (shown when not logged in) -->
+            <div class="login-message" id="login-required" style="display: block;">
+                <h2>Acceso a cursos</h2>
+                <p>Para ver tus cursos y acceder al contenido educativo, por favor inicia sesión en tu cuenta.</p>
+                <button class="login-btn" onclick="window.location.href='cuenta.html'">Iniciar sesión</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div>
+                <img src="img/escudo.png" alt="Logo">
+                <div class="footer-network">
+                    <a href="#" class="social-link"><svg fill="#000000" viewBox="0 0 256 256" id="Flat"     xmlns="http://www.w3.org/2000/svg">
+                        <path d="M228,128A100,100,0,1,0,127.98877,228l.01123.001.01123-.001A100.11345,100.11345,0,0,0,228,128Zm-96,91.90771V148.001h28a4,4,0,0,0,0-8H132v-28a20.02229,20.02229,0,0,1,20-20h16a4,4,0,0,0,0-8H152a28.03145,28.03145,0,0,0-28,28v28H96a4,4,0,0,0,0,8h28v71.90673a92,92,0,1,1,8,0Z"/>
+                      </svg></a>
+                    <a href="#" class="social-link"><svg fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M128,84a44,44,0,1,0,44,44A44.04978,44.04978,0,0,0,128,84Zm0,80a36,36,0,1,1,36-36A36.04061,36.04061,0,0,1,128,164ZM172,32H84A52.059,52.059,0,0,0,32,84v88a52.059,52.059,0,0,0,52,52h88a52.059,52.059,0,0,0,52-52V84A52.059,52.059,0,0,0,172,32Zm44,140a44.04978,44.04978,0,0,1-44,44H84a44.04978,44.04978,0,0,1-44-44V84A44.04978,44.04978,0,0,1,84,40h88a44.04978,44.04978,0,0,1,44,44ZM188,76a8,8,0,1,1-8-8A8.00917,8.00917,0,0,1,188,76Z"/>
+                      </svg></a>
+                    <a href="#" class="social-link"><svg fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M128.00049,28A100.02594,100.02594,0,0,0,41.11475,177.53908l-9.0044,31.51661a11.99971,11.99971,0,0,0,14.835,14.834l31.5166-9.00391A100.00677,100.00677,0,1,0,128.00049,28Zm0,192a91.87082,91.87082,0,0,1-46.95264-12.86719,3.99494,3.99494,0,0,0-3.14355-.4082l-33.15723,9.47363a3.99979,3.99979,0,0,1-4.94434-4.94531l9.47266-33.15625a4.00111,4.00111,0,0,0-.4082-3.14355A92.01077,92.01077,0,1,1,128.00049,220Zm50.51123-73.457-20.45947-11.69141a12.01054,12.01054,0,0,0-12.12745.12891l-13.80664,8.28418a44.04183,44.04183,0,0,1-19.38232-19.38281l8.28369-13.80664a12.0108,12.0108,0,0,0,.12891-12.127l-11.69092-20.46A10.91584,10.91584,0,0,0,100,72a32.00811,32.00811,0,0,0-32,31.88086A84.001,84.001,0,0,0,151.999,188h.12012A32.00842,32.00842,0,0,0,184,156,10.913,10.913,0,0,0,178.51172,146.543ZM152.10791,180h-.1084A75.99972,75.99972,0,0,1,76,103.8926,23.997,23.997,0,0,1,100,80a2.89975,2.89975,0,0,1,2.51172,1.457L114.20264,101.918a4.00418,4.00418,0,0,1-.043,4.042l-9.38916,15.64844a3.9987,3.9987,0,0,0-.21826,3.69824,52.04112,52.04112,0,0,0,26.1416,26.1416,3.99707,3.99707,0,0,0,3.69873-.21875L150.04,141.84084a4.006,4.006,0,0,1,4.043-.04394l20.46045,11.69238A2.89712,2.89712,0,0,1,176,156,23.99725,23.99725,0,0,1,152.10791,180Z"/>
+                      </svg></a>
+                </div>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+            </div>
+            <div class="footer-navigate-father">
+                <div class="footer-navigate">
+                    <h3>Navega</h3>
+                    <svg fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M143.27393,137.61279l61.74023-22.45068a12.00033,12.00033,0,0,0,.1123-22.51367L49.88818,34.43457A11.99916,11.99916,0,0,0,34.43994,49.88379L92.65381,205.12158a11.89229,11.89229,0,0,0,11.23242,7.78662h.0625a11.89362,11.89362,0,0,0,11.21777-7.89941L137.61719,143.269l67.56006,67.55908a3.99957,3.99957,0,1,0,5.65625-5.65624Zm-35.625,64.66211a3.90383,3.90383,0,0,1-3.73926,2.6333h-.01758a3.90022,3.90022,0,0,1-3.748-2.5957L41.93018,47.0752v-.00049a3.94054,3.94054,0,0,1,.917-4.23291,3.89654,3.89654,0,0,1,4.23242-.917l155.23828,58.21436a4.00017,4.00017,0,0,1-.03808,7.50439L138.146,130.96484a11.97169,11.97169,0,0,0-7.17579,7.17676Z"/>
+                      </svg>
+                </div>
+                <p><a href="institucion.html">Institución</a></p>
+                <p><a href="servicios.html">Servicios</a></p>
+                <p><a href="#">Contacto</a></p>
+                <p><a href="#">Cuenta</a></p>
+            </div>
+            <div>
+                <h3>Contacto</h3>
+                <div class="footer-contact">
+                    <svg fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M176,220C98.80371,220,36,157.19629,36,80A52.06484,52.06484,0,0,1,81.4209,28.41211a12.01552,12.01552,0,0,1,12.47558,7.19141L113.9873,82.48047a11.97729,11.97729,0,0,1-.99023,11.2998L96.36133,119.19922a3.938,3.938,0,0,0-.291,3.86035h.001a80.54061,80.54061,0,0,0,37.19726,37.0293,3.93771,3.93771,0,0,0,3.8711-.31836l25.03515-16.69434a11.96393,11.96393,0,0,1,11.38379-1.0459l46.83789,20.07325a12.01851,12.01851,0,0,1,7.19141,12.4746A52.06486,52.06486,0,0,1,176,220ZM82.89941,36.31934a3.71329,3.71329,0,0,0-.47558.03027A44.04825,44.04825,0,0,0,44,80c0,72.78516,59.21484,132,132,132a44.04828,44.04828,0,0,0,43.65039-38.4248,3.98053,3.98053,0,0,0-2.40625-4.11817L170.4082,149.38379a3.99519,3.99519,0,0,0-3.7959.34863l-25.03515,16.69434A11.96472,11.96472,0,0,1,129.79,167.294a88.58663,88.58663,0,0,1-40.9082-40.72364l.001.001a11.96889,11.96889,0,0,1,.78516-11.75293l16.63574-25.41895a3.99531,3.99531,0,0,0,.33008-3.76855L86.543,38.75586A3.99936,3.99936,0,0,0,82.89941,36.31934Z"/>
+                    </svg><p>300-001-0001</p>
+                </div>
+                <p>En el centro Educativo formamos niños y jóvenes<br>para un mejor futuro</p>
+            </div>
+            <div class="footer-section">
+                <h3>Ubicación</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509506!2d-122.4194155846814!3d37.77492977975962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808d2d6b1b7d%3A0x9e6e9b7c5f6b1a9!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1631234567890!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Copyright - Todos los derechos
+        </div>
+    </footer>
+
+    <!-- Accessibility Panel -->
+    <aside>
+        <button class="nav-button headphones" onclick="toggleAccessibilityPanel()" title="Abrir opciones de accesibilidad"><svg fill="#000000" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+            <path d="M199.90234,57.02637a99.25278,99.25278,0,0,0-71.1455-29.02344A100.00065,100.00065,0,0,0,28,128v56a20.02229,20.02229,0,0,0,20,20H64a20.02229,20.02229,0,0,0,20-20V144a20.02229,20.02229,0,0,0-20-20H36.085a92.00542,92.00542,0,0,1,92.67188-87.99756A92.00463,92.00463,0,0,1,221.37109,124h-27.915a20.02229,20.02229,0,0,0-20,20v40a20.02229,20.02229,0,0,0,20,20h16a19.86943,19.86943,0,0,0,12-4.03809V208a28.03145,28.03145,0,0,1-28,28H136a4,4,0,0,0,0,8h57.45605a36.04061,36.04061,0,0,0,36-36V128A99.3124,99.3124,0,0,0,199.90234,57.02637ZM64,132a12.01343,12.01343,0,0,1,12,12v40a12.01312,12.01312,0,0,1-12,12H48a12.01312,12.01312,0,0,1-12-12V132Zm145.45605,64h-16a12.01312,12.01312,0,0,1-12-12V144a12.01344,12.01344,0,0,1,12-12h28v52A12.01312,12.01312,0,0,1,209.45605,196Z"/>
+          </svg></button>
+        <div class="accessibility-panel" id="accessibilityPanel">
+            <button class="close-panel" onclick="closeAccessibilityPanel()" title="Cerrar panel">✖</button>
+            <h3>Accesibilidad</h3>
+            <div class="profiles">
+                <select onchange="applyProfile(this.value)">
+                    <option value="">Seleccionar perfil de accesibilidad</option>
+                    <option value="motor-disability">Discapacidad Motora</option>
+                    <option value="blindness">Ceguera</option>
+                    <option value="color-blindness">Daltonismo</option>
+                    <option value="dyslexia">Dislexia</option>
+                    <option value="low-vision">Visión baja</option>
+                    <option value="cognitive">Cognitivo y aprendizaje</option>
+                    <option value="seizures">Convulsiones y epilépticos</option>
+                    <option value="adhd">TDAH</option>
+                </select>
+            </div>
+            <div class="accessibility-options">
+                <button onclick="readSelection()">
+                    <span class="icon">📋</span> Leer selección
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="readPage()">
+                    <span class="icon">📢</span> Leer página
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="toggleContrast()">
+                    <span class="icon">🌗</span> Contraste +
+                    <span class="steps"><span class="step"></span><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="toggleSmartContrast()">
+                    <span class="icon">🔆</span> Contraste inteligente
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="toggleHighlightLinks()">
+                    <span class="icon">🔗</span> Resaltar enlaces
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="toggleBiggerText()">
+                    <span class="icon">🔤</span> Agrandar texto
+                    <span class="steps"><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="toggleTextSpacing()">
+                    <span class="icon">↔</span> Espaciado de texto
+                    <span class="steps"><span class="step"></span><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="togglePauseAnimations()">
+                    <span class="icon">⏸️</span> Detener animaciones
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="toggleHideImages()">
+                    <span class="icon">🖼️</span> Ocultar imágenes
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="toggleDyslexiaFont()">
+                    <span class="icon">📝</span> Apto para dislexia
+                    <span class="steps"><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="toggleBiggerCursor()">
+                    <span class="icon">🖱️</span> Cursor
+                    <span class="steps"><span class="step"></span><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="toggleTooltips()">
+                    <span class="icon">💬</span> Información
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="togglePageStructure()">
+                    <span class="icon">📄</span> Estructura de la página
+                    <span class="steps"><span class="step"></span></span>
+                </button>
+                <button onclick="toggleLineHeight()">
+                    <span class="icon">↕</span> Altura de la línea
+                    <span class="steps"><span class="step"></span><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="toggleTextAlign()">
+                    <span class="icon">📐</span> Texto alineado
+                    <span class="steps"><span class="step"></span><span class="step"></span><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="toggleSaturation()">
+                    <span class="icon">🎨</span> Saturación
+                    <span class="steps"><span class="step"></span><span class="step"></span><span class="step"></span></span>
+                </button>
+                <button onclick="resetAccessibility()" class="reset-btn">
+                    <span class="icon">🔄</span> Restablecer configuraciones
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Scripts -->
+    <script src="asside.js"></script>
+    <script>
+        // Course data
+        const coursesData = {
+            'lenguaje-senas': {
+                title: 'Aprender Lenguaje de Señas',
+                image: 'img/lenguaje-senas.jpg',
+                description: 'Aprende los fundamentos del lenguaje de señas con nuestros vídeos explicativos. Este curso está diseñado para que puedas comunicarte de manera básica con personas sordas o con dificultades auditivas.',
+                lessons: [
+                    { title: 'Introducción al lenguaje de señas', duration: '0:00' },
+                    { title: 'Saludos y presentaciones', duration: '1:00' },
+                    { title: 'Colores en lenguaje de señas', duration: '2:30' },
+                    { title: 'Animales en lenguaje de señas', duration: '2:00' }
+                ]
+            },
+            'matematicas': {
+                title: 'Matemáticas Básicas',
+                image: 'img/matematicas.jpg',
+                description: 'Refuerza tus conocimientos en matemáticas básicas con este curso interactivo. Aprende operaciones fundamentales, fracciones y resolución de problemas.',
+                lessons: [
+                    { title: 'Sumas y restas', duration: '0:00' },
+                    { title: 'Multiplicación y división', duration: '1:15' },
+                    { title: 'Fracciones básicas', duration: '2:45' },
+                    { title: 'Conceptos matemáticos explicados', duration: '3:00' }
+                ]
+            },
+            'lectura': {
+                title: 'Lectura Comprensiva',
+                image: 'img/lectura.jpg',
+                description: 'Mejora tu capacidad de comprensión lectora con técnicas y ejercicios prácticos. Ideal para estudiantes de todos los niveles.',
+                lessons: [
+                    { title: 'Técnicas de lectura rápida', duration: '0:00' },
+                    { title: 'Identificando ideas principales', duration: '1:30' },
+                    { title: 'Resumen y síntesis', duration: '3:00' },
+                    { title: 'Subtítulos disponibles en español', duration: '2:15' }
+                ]
+            },
+            'arte-creatividad': {
+                title: 'Arte y Creatividad',
+                image: 'img/arte.jpg',
+                description: 'Explora tu lado artístico con actividades que fomentan la creatividad y la expresión personal a través del arte.',
+                lessons: [
+                    { title: 'Introducción al dibujo', duration: '0:00' },
+                    { title: 'Pintura básica', duration: '1:20' },
+                    { title: 'Proyectos creativos', duration: '2:50' }
+                ]
+            },
+            'ciencias-naturales': {
+                title: 'Ciencias Naturales',
+                image: 'img/ciencias.jpg',
+                description: 'Descubre el mundo natural con lecciones sobre biología, ecología y experimentos prácticos para niños.',
+                lessons: [
+                    { title: 'El ciclo del agua', duration: '0:00' },
+                    { title: 'Plantas y animales', duration: '1:40' },
+                    { title: 'Experimentos sencillos', duration: '2:30' }
+                ]
+            },
+            'educacion-fisica': {
+                title: 'Educación Física',
+                image: 'img/educacion-fisica.jpg',
+                description: 'Mantente activo con actividades físicas y juegos que promueven la salud y el bienestar físico.',
+                lessons: [
+                    { title: 'Calentamiento y estiramientos', duration: '0:00' },
+                    { title: 'Juegos en equipo', duration: '1:25' },
+                    { title: 'Rutinas de ejercicio', duration: '2:10' }
+                ]
+            }
+        };
+
+        // Function to render courses
+        function renderCourses(courses) {
+            const coursesList = document.getElementById('courses-list');
+            coursesList.innerHTML = '<h1 style="grid-column: 1 / -1; text-align: center;">Mis Cursos</h1>'; // Reset content
+
+            if (courses.length === 0) {
+                const noCourses = document.createElement('p');
+                noCourses.textContent = 'No tienes cursos seleccionados.';
+                noCourses.style.textAlign = 'center';
+                noCourses.style.color = '#555';
+                noCourses.style.gridColumn = '1 / -1';
+                coursesList.appendChild(noCourses);
+                return;
+            }
+
+            courses.forEach(courseId => {
+                const course = coursesData[courseId];
+                if (course) {
+                    const courseCard = document.createElement('div');
+                    courseCard.className = 'course-card';
+                    courseCard.innerHTML = `
+                        <div class="course-header">
+                            <h2>${course.title}</h2>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-image">
+                                <img src="${course.image}" alt="${course.title}">
+                            </div>
+                            <div class="course-info">
+                                <p>${course.description}</p>
+                                <div class="course-lessons">
+                                    ${course.lessons.map(lesson => `
+                                        <div class="lesson-item">
+                                            <span>${lesson.title}</span>
+                                            <span>${lesson.duration}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    coursesList.appendChild(courseCard);
+                }
+            });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+            if (currentUser && currentUser.courses) {
+                document.getElementById('courses-list').style.display = 'grid';
+                document.getElementById('login-required').style.display = 'none';
+                renderCourses(currentUser.courses);
+            } else {
+                document.getElementById('courses-list').style.display = 'none';
+                document.getElementById('login-required').style.display = 'block';
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933bca518b70675f',t:'MTc0NTIyNzA2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
