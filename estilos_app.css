@@ -576,6 +576,7 @@ body {
 .header-perfil {
 	position: relative;
 	/* display: inline-block; */
+	top: 0;
 	width: 100%;
 	background-color: #45AFFF;
 	border-top-left-radius: 15px;
