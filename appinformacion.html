@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<title>Centro Educativo Rural Nicolás de Federmán</title>
+	<link rel="icon" href="img/logo_icono.ico" type="image/ico" />
+
+	<link rel="stylesheet" type="text/css" href="estilosapp2.css">
+	<link rel="stylesheet" type="text/css" href="fuentes/Font-Awesome (675)/estilos_fuente_icono.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #45AFFF;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin: 0 auto 20px;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+        .name {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+        .title {
+            font-size: 18px;
+            opacity: 0.9;
+            margin: 5px 0 15px;
+        }
+        .edit-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .edit-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 20px;
+            color: #4a6fa5;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .info-item {
+            margin-bottom: 10px;
+            display: flex;
+        }
+        .info-label {
+            font-weight: bold;
+            width: 120px;
+            color: #666;
+        }
+        .info-value {
+            flex: 1;
+        }
+        .editable {
+            padding: 5px;
+            border: 1px solid transparent;
+            border-radius: 3px;
+        }
+        .editable:hover {
+            background-color: #f9f9f9;
+            border-color: #ddd;
+        }
+        .editable:focus {
+            outline: none;
+            border-color: #4a6fa5;
+            background-color: white;
+        }
+        .save-btn {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 30px auto 0;
+        }
+        .save-btn:hover {
+            background-color: #3a5a8f;
+        }
+        .hidden {
+            display: none;
+        }
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+		<div class="contenedor_aplicacion">
+			<div class="row">
+				<div class="logo">
+					<a href="aplicacion.html">BIENVENIDO AL CENTRO EDUCATIVO RURAL NICOLÁS DE FEDERMÁN</a>
+				</div>
+				<div class="boton_abrir_menu">
+					<span></span>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="contenedor_menu_aplicacion">
+		<nav class="menu_aplicacion">
+			<div class="head">
+				<strong>Hola</strong>
+				<div class="boton_cerrar_menu">&times;</div>
+			</div>
+			<ul class="opciones_menu_aplicacion">
+
+				<li class="contenedor_foto_perfil">
+					<div class="foto_perfil_wrapper">
+						<img src="img/logo_aplicacion.png" id="foto_perfil" class="logo_aplicacion">
+						<div class="overlay_foto_perfil">
+							<span class="icon-camera cambiar_foto_texto">Cambiar</span>
+						</div>
+					</div>
+					<input type="file" id="input_foto_perfil" accept="image/*" style="display: none;">
+				</li>
+
+				<li class="submenu_informacion">
+					<a href="#"><span class="icon-user-circle"></span>Información<span
+							class="boton_submenu icon-chevron-down"></span></a>
+					<ul class="opciones_informacion">
+						<li><a href="#"><span class="icon-id-card"></span>Perfil</a></li>
+						<li><a href="#"><span class="icon-cog"></span>Ajustes</a></li>
+						<li><a href="#"><span class="icon-power-off"></span>Cerrar Sesión</a></li>
+					</ul>
+				</li>
+
+				<li class="submenu_gestioneducativa">
+					<a href="#"><span class="icon-institution"></span>Gestión Educativa<span
+							class="boton_submenu icon-chevron-down"></span></a>
+					<ul class="opciones_gestioneducativa">
+						<li><a href="#"><span class="icon-users"></span>Gestión de Usuarios</a></li>
+
+						<li class="submenu_gestiondedocentes">
+							<a href="#"><span class="icon-sitemap"></span>Gestión de Docentes<span
+									class="boton_submenu icon-chevron-down"></span></a>
+							<ul class="opciones_gestiondedocentes">
+								<li><a href="#"><span class="icon-thumb-tack"></span>Asignación Académica</a></li>
+								<li><a href="#"><span class="icon-trophy"></span>Seguimiento a Docentes</a></li>
+							</ul>
+						</li>
+
+						<li class="submenu_gestionacademica">
+							<a href="#"><span class="icon-graduation-cap"></span>Gestión Académica<span
+									class="boton_submenu icon-chevron-down"></span></a>
+							<ul class="opciones_gestionacademica">
+								<li><a href="#"><span class="icon-clock-o"></span>Control de Asistencia</a></li>
+								<li><a href="#"><span class="icon-calculator"></span>Seguimiento Académico</a></li>
+								<li><a href="#"><span class="icon-legal"></span>Seguimiento Disciplinario</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+
+				<li class="submenu_herramientas">
+					<a href="#"><span class="icon-suitcase"></span>Herramientas<span
+							class="boton_submenu icon-chevron-down"></span></a>
+					<ul class="opciones_herramientas">
+
+						<li class="submenu_documentos">
+							<a href="#"><span class="icon-file-text-o"></span>Documentos<span
+									class="boton_submenu icon-chevron-down"></span></a>
+							<ul class="opciones_documentos">
+								<li><a href="#"><span class="icon-pencil-square-o"></span>Informe de Notas</a></li>
+								<li><a href="#"><span class="icon-certificate"></span>Certificados</a></li>
+							</ul>
+						</li>
+						<li><a href="#"><span class="icon-calendar"></span>Cronograma</a></li>
+						<li><a href="#"><span class="icon-address-book"></span>Directorio</a></li>
+					</ul>
+				</li>
+				<li><a href="modulos.html"><span class="icon-th"></span>Módulos</a></li>
+
+				<li><a href="#"><span class="icon-book"></span>Manual de Usuario</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<!--==================================main==================================-->
+	<main class="main_aplicacion">
+		<script src="script_aplicacion.js"></script>
+	</main>
+
+    <div class="container">
+        <div class="header-perfil">
+            <input type="file" id="fileInput" accept="image/*">
+            <img src="https://via.placeholder.com/150" alt="Foto de perfil" class="profile-pic" id="profilePic">
+            <h1 class="name" id="userName" contenteditable="true">Juan Pérez</h1>
+            <p class="title" id="userTitle" contenteditable="true">Desarrollador Web</p>
+            <button class="edit-btn" id="editBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px;">
+                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                </svg>
+                Editar
+            </button>
+        </div>
+        
+       <div class="content">
+    <div class="section">
+        <h2 class="section-title">Información Personal</h2>
+        <div class="info-item">
+            <div class="info-label">Email:</div>
+            <div class="info-value">
+                <span class="editable" id="userEmail" contenteditable="true">juan.perez@example.com</span>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">Teléfono:</div>
+            <div class="info-value">
+                <span class="editable" id="userPhone" contenteditable="true">+1 234 567 890</span>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">Ubicación:</div>
+            <div class="info-value">
+                <span class="editable" id="userLocation" contenteditable="true">Bogotá, Colombia</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Sobre Mí</h2>
+        <p class="editable" id="userAbout" contenteditable="true">
+            Profesor de lengua de señas con 7 años de experiencia en educación inclusiva.
+            Especializado en la enseñanza de la lengua de señas colombiana y en la integración de estudiantes con discapacidad auditiva.
+            Comprometido con la creación de un ambiente educativo accesible y enriquecedor para todos los estudiantes.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">Habilidades</h2>
+        <div class="info-item">
+            <div class="info-value">
+                <span class="editable" id="userSkills" contenteditable="true">
+                    Lengua de Señas Colombiana, Educación Inclusiva, Comunicación Aumentativa y Alternativa,
+                    Planificación Educativa, Trabajo con Estudiantes con Discapacidad Auditiva, Capacitación en Sensibilización sobre Discapacidad
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+            <button class="save-btn hidden" id="saveBtn">Guardar Cambios</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const editBtn = document.getElementById('editBtn');
+            const saveBtn = document.getElementById('saveBtn');
+            const editableElements = document.querySelectorAll('[contenteditable="true"]');
+            const profilePic = document.getElementById('profilePic');
+            const fileInput = document.getElementById('fileInput');
+            
+            let isEditing = false;
+            let originalValues = {};
+            
+            // Guardar valores originales
+            function saveOriginalValues() {
+                editableElements.forEach(element => {
+                    originalValues[element.id] = element.textContent;
+                });
+            }
+            
+            // Restaurar valores originales
+            function restoreOriginalValues() {
+                editableElements.forEach(element => {
+                    element.textContent = originalValues[element.id];
+                });
+            }
+            
+            // Cambiar entre modo edición y modo visualización
+            function toggleEditMode() {
+                isEditing = !isEditing;
+                
+                if (isEditing) {
+                    saveOriginalValues();
+                    editBtn.textContent = 'Cancelar';
+                    saveBtn.classList.remove('hidden');
+                    
+                    // Hacer que todos los elementos editables sean editables
+                    editableElements.forEach(element => {
+                        element.setAttribute('contenteditable', 'true');
+                    });
+                } else {
+                    restoreOriginalValues();
+                    editBtn.textContent = 'Editar';
+                    saveBtn.classList.add('hidden');
+                    
+                    // Deshabilitar edición
+                    editableElements.forEach(element => {
+                        element.setAttribute('contenteditable', 'false');
+                    });
+                }
+            }
+            
+            // Guardar cambios
+            function saveChanges() {
+                // Aquí normalmente enviarías los cambios al servidor
+                // Por ahora solo saldremos del modo edición
+                alert('Cambios guardados (simulado)');
+                toggleEditMode();
+            }
+            
+            // Cambiar foto de perfil
+            function changeProfilePic(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePic.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+            
+            // Event listeners
+            editBtn.addEventListener('click', toggleEditMode);
+            saveBtn.addEventListener('click', saveChanges);
+            profilePic.addEventListener('click', function() {
+                if (isEditing) {
+                    fileInput.click();
+                }
+            });
+            fileInput.addEventListener('change', changeProfilePic);
+            
+            // Inicializar valores originales
+            saveOriginalValues();
+        });
+    </script>
+</body>
+</html>
