@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Asistencia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #ffffff;
+        }
+        body {
+            font-size: 1.125rem;
+            line-height: 1.5;
+        }
+        button, input, select {
+            min-height: 44px;
+            min-width: 44px;
+        }
+        .focus-visible {
+            outline: 3px solid #1e40af;
+            outline-offset: 2px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .transition-all {
+                transition: none;
+            }
+        }
+        .nav-menu {
+            transform: translateX(100%);
+        }
+        .nav-menu.open {
+            transform: translateX(0);
+        }
+        .attendance-checkbox {
+            width: 24px;
+            height: 24px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-blue-800 text-white p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">Plataforma Educativa</h1>
+        <button id="menu-toggle" class="focus-visible p-2" aria-label="Abrir menú de navegación" aria-expanded="false">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </header>
+    <nav id="nav-menu" class="nav-menu fixed top-0 right-0 h-full bg-blue-900 text-white w-64 p-4 transition-all duration-300" role="navigation" aria-hidden="true">
+        <button id="close-menu" class="mb-4 focus-visible p-2" aria-label="Cerrar menú">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <ul class="space-y-4">
+            <li><a href="login.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Iniciar Sesión</a></li>
+            <li><a href="manage-accounts.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Gestionar Cuentas</a></li>
+            <li><a href="register-grades.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Registrar Notas</a></li>
+            <li><a href="view-grades.html" class="block hover:bg-blue-7 00 p-2 rounded focus-visible">Consultar Notas</a></li>
+            <li><a href="register-attendance.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Registrar Asistencia</a></li>
+            <li><a href="parent-view.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Notas y Asistencia (Padres)</a></li>
+            <li><a href="calendar.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Cronograma Académico</a></li>
+            <li><a href="contact.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Contacto</a></li>
+            <li><a href="mission.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Misión y Visión</a></li>
+            <li><a href="sign-language.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Curso LSC</a></li>
+            <li><a href="directory.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Directorio</a></li>
+            <li><a href="user-manual.html" class="block hover:bg-blue-700 p-2 rounded focus-visible">Manual de Usuario</a></li>
+        </ul>
+    </nav>
+    <main class="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-3xl font-semibold mb-6 text-center">Registrar Asistencia</h2>
+        <section aria-labelledby="attendance-form-title">
+            <h3 id="attendance-form-title" class="text-xl font-medium mb-4">Registrar Asistencia Diaria</h3>
+            <form id="attendance-form" class="space-y-6" aria-live="polite">
+                <div>
+                    <label for="date" class="block text-lg font-medium">Fecha</label>
+                    <input type="date" id="date" name="date" required class="w-full p-3 border rounded-lg focus-visible" aria-describedby="date-help">
+                    <small id="date-help" class="text-gray-600">Seleccione la fecha de la clase.</small>
+                </div>
+                <div>
+                    <label for="subject" class="block text-lg font-medium">Asignatura</label>
+                    <select id="subject" name="subject" required class="w-full p-3 border rounded-lg focus-visible" aria-describedby="subject-help">
+                        <option value="">Seleccione una asignatura</option>
+                        <option value="math">Matemáticas</option>
+                        <option value="science">Ciencias</option>
+                        <option value="history">Historia</option>
+                        <option value="language">Lenguaje</option>
+                    </select>
+                    <small id="subject-help" class="text-gray-600">Seleccione la asignatura correspondiente.</small>
+                </div>
+                <div>
+                    <h4 class="text-lg font-medium mb-2">Estudiantes</h4>
+                    <table role="grid" aria-describedby="attendance-form-title">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Asistió</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-list"></tbody>
+                    </table>
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit" class="flex-1 bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus-visible">Guardar Asistencia</button>
+                    <button type="button" id="clear-form" class="flex-1 bg-gray-400 text-white p-3 rounded-lg hover:bg-gray-500 focus-visible">Limpiar</button>
+                </div>
+            </form>
+        </section>
+        <section aria-labelledby="past-attendance-title" class="mt-8">
+            <h3 id="past-attendance-title" class="text-xl font-medium mb-4">Asistencias Registradas</h3>
+            <table role="grid" aria-describedby="past-attendance-title">
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Asignatura</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="past-attendance"></tbody>
+            </table>
+        </section>
+    </main>
+    <script>
+        // Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+            navMenu.classList.toggle('aria-hidden');
+            menuToggle.setAttribute('aria-expanded', navMenu.classList.contains('open'));
+        });
+
+        closeMenu.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+            navMenu.classList.add('aria-hidden');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        });
+
+        // Attendance Management
+        const attendanceForm = document.getElementById('attendance-form');
+        const studentList = document.getElementById('student-list');
+        const clearFormButton = document.getElementById('clear-form');
+        const pastAttendance = document.getElementById('past-attendance');
+        let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+        let attendanceRecords = JSON.parse(localStorage.getItem('attendance')) || [];
+
+        // Populate student list
+        function populateStudents(attended = []) {
+            studentList.innerHTML = '';
+            const students = accounts.filter(account => account.role === 'student');
+            if (students.length === 0) {
+                studentList.innerHTML = '<tr><td colspan="3" class="text-center text-gray-600">No hay estudiantes registrados.</td></tr>';
+                return;
+            }
+            students.forEach(student => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${student.name}</td>
+                    <td>${student.email}</td>
+                    <td>
+                        <input type="checkbox" class="attendance-checkbox focus-visible" name="attendance" value="${student.email}" 
+                            ${attended.includes(student.email) ? 'checked' : ''} 
+                            aria-label="Marcar asistencia para ${student.name}">
+                    </td>
+                `;
+                studentList.appendChild(row);
+            });
+        }
+
+        // Render past attendance
+        function renderPastAttendance() {
+            pastAttendance.innerHTML = '';
+            attendanceRecords.forEach((record, index) => {
+                const subjectName = {
+                    math: 'Matemáticas',
+                    science: 'Ciencias',
+                    history: 'Historia',
+                    language: 'Lenguaje'
+                }[record.subject] || record.subject;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.date}</td>
+                    <td>${subjectName}</td>
+                    <td>
+                        <button class="edit-btn bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600 focus-visible" data-index="${index}" aria-label="Editar asistencia del ${record.date} para ${subjectName}">Editar</button>
+                    </td>
+                `;
+                pastAttendance.appendChild(row);
+            });
+        }
+
+        // Form submission
+        attendanceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const date = document.getElementById('date').value;
+            const subject = document.getElementById('subject').value;
+            const checkboxes = document.querySelectorAll('input[name="attendance"]:checked');
+            const attendedStudents = Array.from(checkboxes).map(cb => cb.value);
+            const editIndex = attendanceForm.dataset.editIndex;
+
+            if (editIndex !== undefined) {
+                // Update existing record
+                attendanceRecords[editIndex] = { date, subject, attended: attendedStudents };
+                delete attendanceForm.dataset.editIndex;
+            } else {
+                // Create new record
+                attendanceRecords.push({ date, subject, attended: attendedStudents });
+            }
+
+            localStorage.setItem('attendance', JSON.stringify(attendanceRecords));
+            attendanceForm.reset();
+            populateStudents();
+            renderPastAttendance();
+            alert(editIndex !== undefined ? 'Asistencia actualizada exitosamente.' : 'Asistencia registrada exitosamente.');
+        });
+
+        // Clear form
+        clearFormButton.addEventListener('click', () => {
+            attendanceForm.reset();
+            delete attendanceForm.dataset.editIndex;
+            populateStudents();
+        });
+
+        // Edit past attendance
+        pastAttendance.addEventListener('click', (e) => {
+            if (e.target.classList.contains('edit-btn')) {
+                const index = e.target.dataset.index;
+                const record = attendanceRecords[index];
+                document.getElementById('date').value = record.date;
+                document.getElementById('subject').value = record.subject;
+                populateStudents(record.attended);
+                attendanceForm.dataset.editIndex = index;
+            }
+        });
+
+        // Initial setup
+        populateStudents();
+        renderPastAttendance();
+    </script>
+</body>
+</html>

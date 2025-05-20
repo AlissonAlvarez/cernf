@@ -9,31 +9,80 @@
     <link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
     <style>
-        /* Reset básico */
+        :root {
+            --primary: #1e40af;
+            --secondary: #ffffff;
+            --bg-color: #f3f4f6;
+            --text-color: #111827;
+            --accent-color: #F5A623;
+            --nav-color: #42A5F5;
+            --footer-color: #45AFFF;
+            --footer-bottom-color: #FF9100;
+        }
+        
+        /* Reset básico y estilos generales */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: "Open Sans", sans-serif;
-            background-color: #fff;
-            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: var(--bg-color);
         }
-
+        
+        button, input {
+            min-height: 48px;
+            min-width: 48px;
+        }
+        
+        .focus-visible {
+            outline: 4px solid var(--primary);
+            outline-offset: 2px;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .transition-all {
+                transition: none;
+            }
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+        }
+        
+        /* High contrast and text scaling support */
+        @media (max-width: 640px) {
+            body {
+                font-size: 1.125rem;
+            }
+        }
+        
         /* Encabezado */
         header {
             position: relative;
             width: 100%;
         }
-
-        h2 {
+        
+        h2, h3 {
             font-family: 'Roboto Medium', sans-serif;
-            font-size: 40px;
             font-weight: 400;
         }
-
+        
+        h2 {
+            font-size: 2.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+        }
+        
         .logo img {
             position: absolute;
             top: 20px;
@@ -41,78 +90,76 @@
             width: 200px;
             z-index: 1;
         }
-
+        
         .header-image img {
             width: 100%;
             height: 400px;
             object-fit: cover;
         }
-
+        
         /* Menú de navegación */
         nav {
             position: relative;
-            background-color: #42A5F5;
+            background-color: var(--nav-color);
             padding: 15px 0;
             top: -5px;
             overflow: hidden;
         }
-
+        
         nav ul {
             list-style: none;
             display: flex;
             justify-content: center;
             gap: 15px;
         }
-
+        
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 1rem;
             padding: 8px 20px;
             padding-bottom: 16px;
             border-top-right-radius: 5px;
             border-top-left-radius: 5px;
-            transition: background-color 0.3s;
-            transition: ease 0.4s;
+            transition: all 0.4s ease;
         }
-
+        
         nav ul li a.active {
-            background-color: #F5A623;
+            background-color: var(--accent-color);
             color: #333;
         }
-
+        
         nav ul li a:hover {
-            background-color: #F5A623;
+            background-color: var(--accent-color);
             color: #333;
-            transition: ease 0.4s;
         }
-
+        
         /* Sección principal */
         main {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
-
-        .intro {
+        
+        .intro, .intro2 {
             display: flex;
             gap: 30px;
             align-items: center;
             margin-bottom: 60px;
             position: relative;
         }
-
+        
         .intro-image {
             position: relative;
             width: 50%;
         }
-
+        
         .intro-image img {
             width: 100%;
             border-radius: 10px;
         }
-
+        
         .intro-text {
             width: 50%;
             background-color: rgba(255, 255, 255, 0.9);
@@ -120,81 +167,31 @@
             border-radius: 10px;
             position: relative;
         }
-
+        
         .intro-text h2 {
-            font-size: 24px;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             color: #333;
         }
-
+        
         .intro-text p {
-            font-size: 14px;
+            font-size: 0.875rem;
             line-height: 1.6;
             margin-bottom: 20px;
             color: #666;
         }
-
+        
         .intro-text button {
-            background-color: #F5A623;
+            background-color: var(--accent-color);
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: bold;
         }
-
-        /* Decoraciones circulares */
-        .intro::before,
-        .intro::after {
-            content: '';
-            position: absolute;
-            background-color: #F5A623;
-            border-radius: 50%;
-        }
-
-        .intro::before {
-            width: 40px;
-            height: 40px;
-            top: -20px;
-            left: -20px;
-        }
-
-        .intro::after {
-            width: 30px;
-            height: 30px;
-            bottom: -15px;
-            right: -15px;
-        }
-
-        .intro-text::before,
-        .intro-text::after {
-            content: '';
-            position: absolute;
-            background-color: #F5A623;
-            border-radius: 50%;
-        }
-
-        .intro-text::before {
-            width: 20px;
-            height: 20px;
-            top: 10px;
-            left: 10px;
-        }
-
-        .intro-text::after {
-            width: 20px;
-            height: 20px;
-            bottom: 10px;
-            right: 10px;
-        }
-
-        .activities {
-            position: relative;
-            text-align: center;
-        }
-
+        
         /* Slider styles */
         .slider-container {
             position: relative;
@@ -202,194 +199,88 @@
             margin: 0 auto;
             overflow: hidden;
         }
-
+        
         .slider {
             display: flex;
             transition: transform 0.5s ease-in-out;
         }
-
+        
         .slider img {
             width: 100%;
-            border: 5px solid #F5A623;
+            border: 5px solid var(--accent-color);
             border-radius: 10px;
             flex-shrink: 0;
         }
-
+        
         .slider-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: #4A90E2;
+            background-color: var(--primary);
             color: white;
             border: none;
             padding: 10px;
             cursor: pointer;
             border-radius: 5px;
-            font-size: 18px;
+            font-size: 1.125rem;
         }
-
+        
         .prev {
             left: 10px;
         }
-
+        
         .next {
             right: 10px;
         }
-
-        .slider::after {
-            content: "NICOLÁS DE FEDERMAN";
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #4A90E2;
-            font-size: 24px;
-            font-weight: bold;
-            opacity: 0.3;
-        }
-
-        /* Más decoraciones circulares */
-        .activities::before,
-        .activities::after {
-            content: '';
-            position: absolute;
-            background-color: #F5A623;
-            border-radius: 50%;
-        }
-
-        .activities::before {
-            width: 40px;
-            height: 40px;
-            top: -20px;
-            left: -20px;
-        }
-
-        .activities::after {
-            width: 30px;
-            height: 30px;
-            bottom: -15px;
-            right: -15px;
-        }
-
+        
         /* Sección intro2 */
         .intro2 {
-            width: 100%;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            margin-bottom: 60px;
-            position: relative;
             flex-direction: row-reverse;
         }
-
+        
         .intro2 .intro-image {
-            position: relative;
             width: 20%;
         }
-
+        
         .intro2 .intro-image img {
             width: 300px;
-            border-radius: 10px;
         }
-
+        
         .intro2 .intro-text {
             width: 70%;
-            background-color: rgba(255, 255, 255, 0.9);
             padding: 30px;
-            border-radius: 10px;
-            position: relative;
         }
-
+        
         .intro2 .intro-text h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
             text-align: center;
         }
-
+        
         .intro2 .intro-text p {
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 1.8;
-            margin-bottom: 20px;
             color: #444;
             text-align: justify;
         }
-
+        
         .intro2 .intro-text button {
-            background-color: #4A90E2;
-            color: white;
-            border: none;
+            background-color: var(--primary);
             padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 1rem;
             display: block;
             margin: 0 auto;
             transition: background-color 0.3s;
         }
-
+        
         .intro2 .intro-text button:hover {
             background-color: #3a7bc8;
         }
-
-        /* Decoraciones circulares para intro2 */
-        .intro2::before,
-        .intro2::after {
-            content: '';
-            position: absolute;
-            background-color: #4A90E2;
-            border-radius: 50%;
-        }
-
-        .intro2::before {
-            width: 40px;
-            height: 40px;
-            top: -20px;
-            left: -20px;
-        }
-
-        .intro2::after {
-            width: 30px;
-            height: 30px;
-            bottom: -15px;
-            right: -15px;
-        }
-
-        .intro2 .intro-text::before,
-        .intro2 .intro-text::after {
-            content: '';
-            position: absolute;
-            background-color: #4A90E2;
-            border-radius: 50%;
-        }
-
-        .intro2 .intro-text::before {
-            width: 20px;
-            height: 20px;
-            top: 10px;
-            left: 10px;
-        }
-
-        .intro2 .intro-text::after {
-            width: 20px;
-            height: 20px;
-            bottom: 10px;
-            right: 10px;
-        }
-
+        
         /* Sección de contacto */
         .contact-section {
             margin: 40px 0;
             text-align: center;
         }
-
-        .contact-section h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
+        
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -397,46 +288,45 @@
             flex-direction: column;
             gap: 15px;
         }
-
+        
         .contact-form input,
         .contact-form textarea {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 14px;
+            font-size: 0.875rem;
             width: 100%;
         }
-
+        
         .contact-form textarea {
             height: 100px;
             resize: none;
         }
-
+        
         .contact-form button {
-            background-color: #F5A623;
+            background-color: var(--accent-color);
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 0.875rem;
             font-weight: bold;
         }
-
+        
         .contact-message {
             margin-top: 20px;
-            font-size: 16px;
-            color: #4A90E2;
+            font-size: 1rem;
+            color: var(--primary);
             display: none;
         }
-
+        
         /* Estilos del footer */
         footer {
-            background-color: #45AFFF;
+            background-color: var(--footer-color);
             color: white;
-            font-family: sans-serif;
         }
-
+        
         .footer-container {
             display: flex;
             justify-content: space-around;
@@ -444,14 +334,13 @@
             flex-wrap: wrap;
             padding: 30px 10px;
         }
-
-
+        
         .footer-navigate {
             display: flex;
             gap: 10px;
             padding-bottom: 20px;
         }
-
+        
         .footer-contact {
             display: flex;
             justify-content: center;
@@ -459,75 +348,169 @@
             padding-top: 20px;
             padding-bottom: 20px;
         }
-
-        svg{
+        
+        svg {
             width: 25px;
             fill: #ffffff;
         }
-
+        
         .footer-network {
             display: flex;
         }
-
+        
         .footer-network svg {
             width: 40px;
         }
-
+        
         .footer-container div {
             text-align: center;
         }
-
+        
         .footer-container img {
             width: 100px;
             margin-bottom: 10px;
         }
-
+        
         .footer-container a {
             margin: 0 10px;
             color: white;
-            font-size: 24px;
+            font-size: 1.5rem;
             text-decoration: none;
         }
-
+        
         .footer-container a:not(.social-link) {
-            font-size: 16px;
+            font-size: 1rem;
             display: block;
             margin: 5px 0;
             text-align: left;
         }
-
+        
         .footer-container h3 {
-            font-family: 'Roboto Medium', sans-serif;
-            font-size: 25px;
+            font-size: 1.5625rem;
             font-weight: 400;
+            padding-bottom: 20px;
         }
-
+        
         .footer-container p {
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 1.6;
         }
-
+        
         .footer-section iframe {
             width: 400px;
             height: 180px;
             border: none;
             border-radius: 5px;
         }
-
-        .footer-section h3 {
-            padding-bottom: 20px;
-        }
-
+        
         .footer-bottom {
-            background-color: #FF9100;
+            background-color: var(--footer-bottom-color);
             text-align: center;
             padding: 10px;
             color: #333;
-            font-size: 14px;
+            font-size: 0.875rem;
+        }
+        
+        /* Estilos específicos para el manual de usuario */
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .mt-8 {
+            margin-top: 2rem;
+        }
+        
+        .p-6 {
+            padding: 1.5rem;
+        }
+        s
+        
+        .rounded-lg {
+            border-radius: 0.5rem;
+        }
+        
+        .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .text-4xl {
+            font-size: 2.25rem;
+        }
+        
+        .font-semibold {
+            font-weight: 600;
+        }
+        
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+        
+        .font-medium {
+            font-weight: 500;
+        }
+        
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+        
+        .bg-blue-600 {
+            background-color: #2563eb;
+        }
+        
+        .text-white {
+            color: #fff;
+        }
+        
+        .hover\:bg-blue-700:hover {
+            background-color: #1d4ed8;
+        }
+        
+        .focus-visible {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+        
+        .w-full {
+            width: 100%;
+        }
+        
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        
+        .list-decimal {
+            list-style-type: decimal;
+        }
+        
+        .pl-6 {
+            padding-left: 1.5rem;
+        }
+        
+        .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+        
+        .nav-menu {
+            transform: translateX(100%);
+        }
+        
+        .nav-menu.open {
+            transform: translateX(0);
         }
     </style>
 </head>
 <body>
+    <!-- Resto del código HTML permanece igual -->
     <!-- Encabezado -->
     <header>
         <div class="logo">
@@ -551,48 +534,46 @@
     </nav>
 
     <!-- Sección principal -->
-    <main>
-        <section class="intro">
-            <div class="intro-image">
-                <img src="img/grupo-ninos-leyendo.jpg" alt="Niños leyendo">
-            </div>
-            <div class="intro-text">
-                <h2>Centro Educativo Rural Nicolás de Federman</h2>
-                <p>
-                    En el Centro Educativo Rural Nicolás de Federman formamos niños, niñas, jóvenes y adultos con valores, conocimientos y habilidades que les permitan integrarse al mundo laboral o continuar su educación en niveles superiores, contribuyendo al desarrollo académico y social de su comunidad. Nos enfocamos en una educación integral, fomentando el respeto, la creatividad y el amor por el aprendizaje. Creemos que cada estudiante tiene un potencial único que puede ser desarrollado con las herramientas adecuadas y el apoyo de nuestra comunidad educativa. ¡Únete a nosotros y descubre un mundo de oportunidades para crecer y alcanzar tus sueños!
-                </p>
-                <button>Conoce nuestros servicios</button>
-            </div>
+    <main class="max-w-4xl mx-auto mt-8 p-6 bg-gray-800 rounded-lg shadow-md">
+        <h2 class="text-4xl font-semibold mb-6 text-center">Manual de Usuario</h2>
+        <section aria-labelledby="intro-title">
+            <h3 id="intro-title" class="text-2xl font-medium mb-4">Introducción</h3>
+            <p class="mb-4">Este manual le guiará sobre cómo usar la Plataforma Educativa. Incluye guías visuales y de audio para facilitar el aprendizaje, diseñadas para ser accesibles a todos los usuarios, incluyendo aquellos con discapacidades visuales o motoras.</p>
+            <button class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus-visible w-full text-lg" onclick="readText('intro-title', 'Este manual le guiará sobre cómo usar la Plataforma Educativa. Incluye guías visuales y de audio para facilitar el aprendizaje, diseñadas para ser accesibles a todos los usuarios, incluyendo aquellos con discapacidades visuales o motoras.')" aria-label="Leer introducción en voz alta">Leer Introducción en Voz Alta</button>
         </section>
-
-        <section class="activities">
-            <div class="slider-container">
-                <div class="slider">
-                    <img src="img/niños-deporte.png" alt="Niños jugando fútbol">
-                    <img src="img/niños-deporte.png" alt="Niños jugando fútbol">
-                    <img src="img/niños-deporte.png" alt="Niños jugando fútbol">
-                </div>
-                <button class="slider-nav prev">&#10094;</button>
-                <button class="slider-nav next">&#10095;</button>
-            </div>
+        <section aria-labelledby="login-guide-title" class="mt-8">
+            <h3 id="login-guide-title" class="text-2xl font-medium mb-4">Cómo Iniciar Sesión</h3>
+            <p class="mb-4">Para acceder a la plataforma, siga estos pasos:</p>
+            <ol class="list-decimal pl-6 space-y-2 mb-4">
+                <li>Vaya a la página de inicio de sesión.</li>
+                <li>Ingrese su correo institucional y contraseña.</li>
+                <li>Haga clic en el botón "Iniciar Sesión".</li>
+            </ol>
+            <img src="https://via.placeholder.com/600x300?text=Inicio+de+Sesi%C3%B3n" alt="Captura de pantalla de la página de inicio de sesión mostrando el formulario con campos para correo y contraseña" class="mb-4">
+            <button class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus-visible w-full text-lg" onclick="readText('login-guide-title', 'Para acceder a la plataforma, siga estos pasos: 1. Vaya a la página de inicio de sesión. 2. Ingrese su correo institucional y contraseña. 3. Haga clic en el botón Iniciar Sesión.')" aria-label="Leer guía de inicio de sesión en voz alta">Leer Guía en Voz Alta</button>
         </section>
-    </main>
-
-    <main>
-        <section class="intro2">
-            <div class="intro-image">
-                <img src="img/niña-en-escuela.png" alt="Estudiantes en el centro educativo">
-            </div>
-            <div class="intro-text">
-                <h2>Nuestra Filosofía Educativa</h2>
-                <p>
-                    En el Centro Educativo Rural Nicolás de Federmán, creemos firmemente que la educación va más allá de la transmisión de conocimientos: es una herramienta transformadora que permite a niños y jóvenes construir un proyecto de vida con sentido, arraigo y responsabilidad. Nuestro compromiso es formar seres humanos íntegros, capaces de enfrentar los desafíos del mundo actual sin perder el vínculo con su origen, su cultura y su territorio.
-                </p>
-                <p>
-                    Nuestra escuela es mucho más que un lugar de clases. Es un espacio de encuentro, crecimiento y reflexión, donde cada estudiante es protagonista de su propio proceso de aprendizaje. Promovemos una educación integral, que armoniza el desarrollo académico con la formación en valores, la conciencia ambiental y el fortalecimiento del tejido social. Aquí se cultivan el respeto, la solidaridad, la empatía y el amor por el entorno rural que nos da identidad.
-                </p>
-                <button>Conoce nuestro modelo educativo</button>
-            </div>
+        <section aria-labelledby="grades-guide-title" class="mt-8">
+            <h3 id="grades-guide-title" class="text-2xl font-medium mb-4">Cómo Consultar Notas (Estudiantes)</h3>
+            <p class="mb-4">Para ver sus notas, siga estos pasos:</p>
+            <ol class="list-decimal pl-6 space-y-2 mb-4">
+                <li>Navegue a la página "Consultar Notas".</li>
+                <li>Ingrese su correo institucional.</li>
+                <li>Seleccione un periodo (opcional) y haga clic en "Filtrar".</li>
+                <li>Vea sus notas en la tabla que aparece.</li>
+            </ol>
+            <img src="https://via.placeholder.com/600x300?text=Consultar+Notas" alt="Captura de pantalla de la página de consulta de notas mostrando un formulario y una tabla de notas" class="mb-4">
+            <button class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus-visible w-full text-lg" onclick="readText('grades-guide-title', 'Para ver sus notas, siga estos pasos: 1. Navegue a la página Consultar Notas. 2. Ingrese su correo institucional. 3. Seleccione un periodo opcional y haga clic en Filtrar. 4. Vea sus notas en la tabla que aparece.')" aria-label="Leer guía de consulta de notas en voz alta">Leer Guía en Voz Alta</button>
+        </section>
+        <section aria-labelledby="accessibility-title" class="mt-8">
+            <h3 id="accessibility-title" class="text-2xl font-medium mb-4">Funciones de Accesibilidad</h3>
+            <p class="mb-4">La plataforma incluye:</p>
+            <ul class="list-disc pl-6 space-y-2 mb-4">
+                <li>Navegación por teclado: Use la tecla Tab para moverte entre elementos y Enter para activarlos.</li>
+                <li>Texto ampliable: Aumente el tamaño del texto hasta un 200% en su navegador.</li>
+                <li>Alto contraste: Colores diseñados para usuarios con baja visión.</li>
+                <li>Compatibilidad con lectores de pantalla: Funciona con herramientas como NVDA y VoiceOver.</li>
+            </ul>
+            <button class="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 focus-visible w-full text-lg" onclick="readText('accessibility-title', 'La plataforma incluye: Navegación por teclado: Use la tecla Tab para moverte entre elementos y Enter para activarlos. Texto ampliable: Aumente el tamaño del texto hasta un 200 por ciento en su navegador. Alto contraste: Colores diseñados para usuarios con baja visión. Compatibilidad con lectores de pantalla: Funciona con herramientas como NVDA y VoiceOver.')" aria-label="Leer guía de accesibilidad en voz alta">Leer Guía en Voz Alta</button>
         </section>
     </main>
 

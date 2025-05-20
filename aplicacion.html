@@ -38,15 +38,23 @@
 			</div>
 			<ul class="opciones_menu_aplicacion">
 
-				<li><img src="img/logo_aplicacion.png" class="logo_aplicacion"></li>
+				<li class="contenedor_foto_perfil">
+					<div class="foto_perfil_wrapper">
+						<img src="img/logo_aplicacion.png" id="foto_perfil" class="logo_aplicacion">
+						<div class="overlay_foto_perfil">
+							<span class="icon-camera cambiar_foto_texto">Cambiar</span>
+						</div>
+					</div>
+					<input type="file" id="input_foto_perfil" accept="image/*" style="display: none;">
+				</li>
 
 				<li class="submenu_informacion">
 					<a href="#"><span class="icon-user-circle"></span>Información<span
 							class="boton_submenu icon-chevron-down"></span></a>
 					<ul class="opciones_informacion">
-						<li><a href="profile.html"><span class="icon-id-card"></span>Perfil</a></li>
+						<li><a href="appinformacion.html"><span class="icon-id-card"></span>Perfil</a></li>
 						<li><a href="#"><span class="icon-cog"></span>Ajustes</a></li>
-						<li><a href="#"><span class="icon-power-off"></span>Cerrar Sesión</a></li>
+						<li><a href="index.html"><span class="icon-power-off"></span>Cerrar Sesión</a></li>
 					</ul>
 				</li>
 
@@ -54,7 +62,7 @@
 					<a href="#"><span class="icon-institution"></span>Gestión Educativa<span
 							class="boton_submenu icon-chevron-down"></span></a>
 					<ul class="opciones_gestioneducativa">
-						<li><a href="#"><span class="icon-users"></span>Gestión de Usuarios</a></li>
+						<li><a href="appcrud.html"><span class="icon-users"></span>Gestión de Usuarios</a></li>
 
 						<li class="submenu_gestiondedocentes">
 							<a href="#"><span class="icon-sitemap"></span>Gestión de Docentes<span
@@ -112,6 +120,7 @@
 
 	</footer>
 
+	
 </body>
 
 </html>

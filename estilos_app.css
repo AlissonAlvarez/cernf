@@ -67,7 +67,7 @@ body {
 .header .boton_abrir_menu {
 	height: 45px;
 	width: 45px;
-	/* background-color: #333333; */
+	background-color: #33333300;
 	border-radius: 50%;
 	cursor: pointer;
 	display: flex;
@@ -102,24 +102,28 @@ body {
 }
 
 .logo_aplicacion {
-	border-radius: 50%;
-	display: block;
-	margin: 0 auto;
-	width: 150px;
-	margin-bottom: 10px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  margin-bottom: 10px;
+}
+
+.logo_aplicacion {
+  cursor: pointer;
 }
 
 
 /*************************************nav*************************************/
 .contenedor_menu_aplicacion {
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: 499;
-	background-color: rgba(0, 0, 0, 0.5);
-	height: 100%;
-	width: 100%;
-	transform: translateX(-100%);
+    position: fixed;
+    right: 0; /* Cambiado de left: 0 a right: 0 */
+    top: 0;
+    z-index: 499;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    transform: translateX(100%); /* Cambiado de translateX(-100%) a translateX(100%) */
 }
 
 .contenedor_menu_aplicacion.open {
@@ -127,15 +131,15 @@ body {
 }
 
 .menu_aplicacion {
-	position: fixed;
-	left: 0;
-	top: 0;
-	background-color: #45AFFF;
-	height: 100%;
-	width: 340px;
-	z-index: 500;
-	transform: translateX(-260px);
-	overflow-y: auto;
+    position: fixed;
+    right: 0; /* Cambiado de left: 0 a right: 0 */
+    top: 0;
+    background-color: #ff9100;
+    height: 100%;
+    width: 340px;
+    z-index: 500;
+    transform: translateX(260px); /* Cambiado de translateX(-260px) a translateX(260px) */
+    overflow-y: auto;
 }
 
 .menu_aplicacion .head {
@@ -153,29 +157,30 @@ body {
 }
 
 .menu_aplicacion strong {
-	height: 50px;
-	color: #dddddd;
-	font-size: 30px;
-	text-align: left;
-	line-height: 50px;
-	padding: 10px 50px 0 15px;
-	display: block;
-	width: 100%;
-	font-weight: 600;
+    height: 50px;
+    color: #dddddd;
+    font-size: 30px;
+    text-align: right; /* Cambiado de text-align: left a text-align: right */
+    line-height: 50px;
+    padding: 10px 15px 0 50px; /* Ajustado el padding */
+    display: block;
+    width: 100%;
+    font-weight: 600;
 }
 
+
 .menu_aplicacion .boton_cerrar_menu {
-	position: absolute;
-	height: 50px;
-	width: 50px;
-	right: 0;
-	top: 0;
-	font-size: 50px;
-	color: #dddddd;
-	text-align: center;
-	line-height: 50px;
-	cursor: pointer;
-	padding: 10px 50px 0 15px;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    left: 0; /* Cambiado de right: 0 a left: 0 */
+    top: 0;
+    font-size: 50px;
+    color: #dddddd;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    padding: 10px 15px 0 50px; /* Ajustado el padding */
 }
 
 .menu_aplicacion ul {
@@ -184,12 +189,9 @@ body {
 	list-style: none;
 }
 
-.menu_aplicacion ul li {
-	display: block;
-}
 
 .menu_aplicacion ul li a {
-	color: #ffffff;
+	color: #000000;
 	font-size: 16px;
 	text-transform: capitalize;
 	text-decoration: none;
@@ -200,24 +202,27 @@ body {
 	padding: 10px 50px 0 15px;
 }
 
+/* Ajustar la barra hover de los elementos del menú */
 .menu_aplicacion ul li a:before {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 0px;
-	height: 100%;
-	background-color: #ffffff;
-	z-index: -1;
-	transition: all 0.5s ease;
+    content: '';
+    position: absolute;
+    right: 0; /* Cambiado de left: 0 a right: 0 */
+    top: 0;
+    width: 0px;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: -1;
+    transition: all 0.5s ease;
 }
 
 .menu_aplicacion ul li a:hover:before {
-	width: 100%;
+    width: 100%;
+    right: auto; /* Asegura que crezca de derecha a izquierda */
+    left: 0;
 }
 
-.menu_aplicacion ul li a:hover {
-	color: #111111;
+.menu_aplicacion ul li a {
+    padding: 10px 15px 0 50px; /* Ajustado el padding */
 }
 
 .submenu_informacion:hover .opciones_informacion {
@@ -553,104 +558,233 @@ body {
     box-shadow: 1px 1px 30px 0px #45AFFF;
 }
 
-.container-info {
-	display: flex;
-	padding: 50px;
-	justify-content: center;
-	padding-top: 110px;
+
+/* Estilos para cambiar foto de perfil */
+.contenedor_foto_perfil {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.container {
-	width: 60%;
-	box-shadow: 1px 1px 6px 1px #d1d1d1;
-	border-radius: 15px;
+.foto_perfil_wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.content {
-	padding: 20px;
+.logo_aplicacion {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
 }
 
-.section {
-	gap: 40px;
+.overlay_foto_perfil {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.header-perfil {
-	position: relative;
-	top: 0px !important;
-	width: 100%;
-	background-color: #45AFFF;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
-	padding: 40px;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-	color: #FFFFFF;
+.cambiar_foto_texto {
+  color: white;
+  font-size: 16px;
+  text-align: center;
 }
 
-.profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 5px solid white;
-    margin: 0 auto 20px;
-    display: block;
-    cursor: pointer;
-    transition: transform 0.3s;
+.foto_perfil_wrapper:hover .overlay_foto_perfil {
+  height: 40%;
 }
 
-.edit-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
+.foto_perfil_wrapper:hover .logo_aplicacion {
+  filter: brightness(80%);
+}
+
+/* Estilos para la ventana modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: auto;
+}
+
+.modal_contenido {
+    background-color: #fff;
+    margin: 10% auto;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: modalOpen 0.4s;
+}
+
+@keyframes modalOpen {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.modal_header {
+    background-color: #ff9100;
+    color: #333;
+    padding: 15px 20px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-#fileInput {
-	display: none;
+.modal_header h2 {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
-.save-btn {
-	position: relative;
-    background-color: #4a6fa5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    display: block;
-	top: -20px;
-	left: 20px
-}
-
-.section-title {
-    font-size: 20px;
-    color: #4a6fa5;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 2px solid #e4e4e4;
-}
-
-.section {
-    margin-bottom: 30px;
-}
-
-.info-label {
+.cerrar_modal {
+    color: #333;
+    font-size: 30px;
     font-weight: bold;
-    width: 120px;
-    color: #666;
+    cursor: pointer;
 }
 
-.info-item {
-	display: flex;
+.cerrar_modal:hover {
+    color: #fff;
+}
+
+.modal_body {
+    padding: 20px;
+}
+
+/* Estilos para la foto de perfil en el modal */
+.foto_perfil_modal_container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.foto_perfil_modal_wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+#foto_perfil_modal {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.overlay_foto_modal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto_perfil_modal_wrapper:hover .overlay_foto_modal {
+    height: 40%;
+}
+
+.foto_perfil_modal_wrapper:hover #foto_perfil_modal {
+    filter: brightness(85%);
+}
+
+/* Estilos para la información del perfil */
+.info_perfil {
+    padding: 0 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.campo_perfil {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.campo_perfil label {
+    display: block;
+    color: #666;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.campo_perfil input {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.campo_perfil input:disabled {
+    color: #333;
+    cursor: default;
+}
+
+.campo_perfil input:focus {
+    border-bottom: 2px solid #45AFFF;
+}
+
+/* Estilos para los botones */
+.boton_editar, .boton_guardar {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #ff9100;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.boton_editar:hover, .boton_guardar:hover {
+    background-color: #ff7b00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.boton_guardar {
+    background-color: #45AFFF;
+}
+
+.boton_guardar:hover {
+    background-color: #3a93d5;
 }

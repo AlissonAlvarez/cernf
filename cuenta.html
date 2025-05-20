@@ -441,17 +441,46 @@
             </div>
 
             <!-- Account Info -->
-            <div id="account-info" class="account-info" style="display: none;">
-                <h2>Información de la Cuenta</h2>
-                <h3>Datos Personales</h3>
-                <p><strong>Nombre:</strong> <span id="account-name"></span></p>
-                <p><strong>Correo:</strong> <span id="account-email"></span></p>
-                <p><strong>Rol:</strong> <span id="account-role"></span></p>
-                <h3>Cursos Seleccionados</h3>
-                <ul id="account-courses"></ul>
-                <button class="auth-btn" onclick="handleLogout()">Cerrar Sesión</button>
-            </div>
+<div id="account-info" class="account-info" style="display: none;">
+    <h2>Información de la Cuenta</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <!-- Información personal -->
+        <div style="flex: 1;">
+            <h3>Datos Personales</h3>
+            <p><strong>Nombre:</strong> <span id="account-name"></span></p>
+            <p><strong>Correo:</strong> <span id="account-email"></span></p>
+            <p><strong>Rol:</strong> <span id="account-role"></span></p>
+
+            <h3>Cursos Seleccionados</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left; border-bottom: 2px solid #000;">Curso</th>
+                        <th style="text-align: center; border-bottom: 2px solid #000;">Nota</th>
+                    </tr>
+                </thead>
+                <tbody id="account-courses">
+                    <!-- Se llenará dinámicamente -->
+                </tbody>
+            </table>
         </div>
+
+        <!-- Foto de perfil -->
+        <div style="flex: 0 0 200px; text-align: center;">
+            <img id="profile-picture" src="" alt="Foto de perfil" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; background-color: #FFBF59; border: 2px solid #666;">
+            <br>
+            <input type="file" id="upload-photo" accept="image/*" style="display: none;">
+            <button onclick="document.getElementById('upload-photo').click()" style="margin-top: 10px; background-color: orange; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+                Cambiar foto
+            </button>
+        </div>
+    </div>
+
+    <!-- Botón cerrar sesión -->
+    <button class="auth-btn" onclick="handleLogout()" style="margin-top: 20px;">Cerrar Sesión</button>
+</div>
+
+
     </main>
 
     <!-- Footer -->
@@ -598,178 +627,206 @@
 
     <!-- Scripts -->
     <script src="asside.js"></script>
-    <script>
-        // Initialize localStorage
-        if (!localStorage.getItem('users')) {
-            localStorage.setItem('users', JSON.stringify([]));
+<script>
+    // Initialize localStorage
+    if (!localStorage.getItem('users')) {
+        localStorage.setItem('users', JSON.stringify([]));
+    }
+
+    // Global variables
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    // Utility Functions
+    function resetCourseSelection() {
+        document.querySelectorAll('.course-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+    }
+
+    function getSelectedCourses() {
+        const selected = [];
+        document.querySelectorAll('.course-item.selected').forEach(item => {
+            selected.push(item.getAttribute('data-course'));
+        });
+        return selected;
+    }
+
+    // Display Functions
+    function showLoginForm() {
+        document.getElementById('login-form').style.display = 'block';
+        document.getElementById('register-form').style.display = 'none';
+        document.getElementById('account-info').style.display = 'none';
+        document.getElementById('auth-container').classList.add('auth-container');
+        document.getElementById('auth-container').classList.remove('account-info');
+    }
+
+    function showRegisterForm() {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('register-form').style.display = 'block';
+        document.getElementById('account-info').style.display = 'none';
+        document.getElementById('auth-container').classList.add('auth-container');
+        document.getElementById('auth-container').classList.remove('account-info');
+        resetCourseSelection();
+    }
+
+    function showAccountInfo() {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('register-form').style.display = 'none';
+        document.getElementById('account-info').style.display = 'block';
+        document.getElementById('auth-container').classList.remove('auth-container');
+        document.getElementById('auth-container').classList.add('account-info');
+
+        // Mostrar datos
+        document.getElementById('account-name').textContent = currentUser.name;
+        document.getElementById('account-email').textContent = currentUser.email;
+        document.getElementById('account-role').textContent = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
+
+        // Mostrar cursos con nota simulada
+        const coursesList = document.getElementById('account-courses');
+        coursesList.innerHTML = '';
+        currentUser.courses.forEach(course => {
+            const row = document.createElement('tr');
+            const courseName = {
+                'lenguaje-senas': 'Aprender Lenguaje de Señas',
+                'matematicas': 'Matemáticas Básicas',
+                'lectura': 'Lectura Comprensiva',
+                'arte-creatividad': 'Arte y Creatividad',
+                'ciencias-naturales': 'Ciencias Naturales',
+                'educacion-fisica': 'Educación Física'
+            }[course];
+
+            row.innerHTML = `
+                <td>${courseName}</td>
+                <td style="text-align: center;"><strong>4.0</strong></td>
+            `;
+            coursesList.appendChild(row);
+        });
+
+        // Cargar imagen desde localStorage si existe
+        const photo = localStorage.getItem(`photo_${currentUser.email}`);
+        if (photo) {
+            document.getElementById('profile-picture').src = photo;
+        } else {
+            document.getElementById('profile-picture').src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAQlBMVEX///+ZmZn///+cnJzm5ubw8PDy8vKhoaHh4eHg4ODd3d3X19e5ubnPz8/CwsK+vr6jo6Pj4+PIyMjmYBS1AAAACnRSTlMA///6mX9AbAHEKf+lAAAATElEQVR42iXHwQ0AIAwEwUP/+9uyEjKAlG7qZSc6kI0/1wAal95IMr0yQaR4kX4EAMOeTfNcUK6PENrMZ6ehA8tATZf69oJb4FAAAAAAAAAAAAADhU/RKnckZo2QgAAAAASUVORK5CYII=';
+        }
+    }
+
+    // Authentication Functions
+    function handleLogin() {
+        const email = document.getElementById('login-email').value.trim();
+        const password = document.getElementById('login-password').value;
+        const users = JSON.parse(localStorage.getItem('users'));
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (user) {
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            showAccountInfo();
+            document.getElementById('login-email-error').style.display = 'none';
+        } else {
+            document.getElementById('login-email-error').style.display = 'block';
+        }
+    }
+
+    function handleRegister() {
+        const name = document.getElementById('register-name').value.trim();
+        const email = document.getElementById('register-email').value.trim();
+        const password = document.getElementById('register-password').value;
+        const role = document.getElementById('register-role').value;
+        const courses = getSelectedCourses();
+
+        let isValid = true;
+
+        // Reset error messages
+        document.getElementById('register-name-error').style.display = 'none';
+        document.getElementById('register-email-error').style.display = 'none';
+        document.getElementById('register-password-error').style.display = 'none';
+        document.getElementById('register-role-error').style.display = 'none';
+        document.getElementById('register-courses-error').style.display = 'none';
+
+        // Validation
+        if (!name) {
+            document.getElementById('register-name-error').style.display = 'block';
+            isValid = false;
         }
 
-        // Global variables
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const users = JSON.parse(localStorage.getItem('users'));
+        if (users.some(u => u.email === email)) {
+            document.getElementById('register-email-error').style.display = 'block';
+            isValid = false;
+        }
 
-        // Utility Functions
-        function resetCourseSelection() {
-            document.querySelectorAll('.course-item').forEach(item => {
+        if (password.length < 6) {
+            document.getElementById('register-password-error').style.display = 'block';
+            isValid = false;
+        }
+
+        if (!role) {
+            document.getElementById('register-role-error').style.display = 'block';
+            isValid = false;
+        }
+
+        if (courses.length < 2 || courses.length > 6) {
+            document.getElementById('register-courses-error').style.display = 'block';
+            isValid = false;
+        }
+
+        if (isValid) {
+            const newUser = { name, email, password, role, courses };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            showAccountInfo();
+        }
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('currentUser');
+        currentUser = null;
+        showLoginForm();
+    }
+
+    // Course Selection Handling
+    document.querySelectorAll('.course-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-btn')) return;
+            const selectedCourses = getSelectedCourses();
+            if (item.classList.contains('selected')) {
                 item.classList.remove('selected');
-            });
-        }
-
-        function getSelectedCourses() {
-            const selected = [];
-            document.querySelectorAll('.course-item.selected').forEach(item => {
-                selected.push(item.getAttribute('data-course'));
-            });
-            return selected;
-        }
-
-        // Display Functions
-        function showLoginForm() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('register-form').style.display = 'none';
-            document.getElementById('account-info').style.display = 'none';
-            document.getElementById('auth-container').classList.add('auth-container');
-            document.getElementById('auth-container').classList.remove('account-info');
-        }
-
-        function showRegisterForm() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('register-form').style.display = 'block';
-            document.getElementById('account-info').style.display = 'none';
-            document.getElementById('auth-container').classList.add('auth-container');
-            document.getElementById('auth-container').classList.remove('account-info');
-            resetCourseSelection();
-        }
-
-        function showAccountInfo() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('register-form').style.display = 'none';
-            document.getElementById('account-info').style.display = 'block';
-            document.getElementById('auth-container').classList.remove('auth-container');
-            document.getElementById('auth-container').classList.add('account-info');
-
-            // Populate account info
-            document.getElementById('account-name').textContent = currentUser.name;
-            document.getElementById('account-email').textContent = currentUser.email;
-            document.getElementById('account-role').textContent = currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1);
-
-            // Populate courses
-            const coursesList = document.getElementById('account-courses');
-            coursesList.innerHTML = '';
-            currentUser.courses.forEach(course => {
-                const li = document.createElement('li');
-                li.textContent = {
-                    'lenguaje-senas': 'Aprender Lenguaje de Señas',
-                    'matematicas': 'Matemáticas Básicas',
-                    'lectura': 'Lectura Comprensiva',
-                    'arte-creatividad': 'Arte y Creatividad',
-                    'ciencias-naturales': 'Ciencias Naturales',
-                    'educacion-fisica': 'Educación Física'
-                }[course];
-                coursesList.appendChild(li);
-            });
-        }
-
-        // Authentication Functions
-        function handleLogin() {
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
-            const users = JSON.parse(localStorage.getItem('users'));
-            const user = users.find(u => u.email === email && u.password === password);
-
-            if (user) {
-                currentUser = user;
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                showAccountInfo();
-                document.getElementById('login-email-error').style.display = 'none';
-            } else {
-                document.getElementById('login-email-error').style.display = 'block';
+            } else if (selectedCourses.length < 6) {
+                item.classList.add('selected');
             }
+        });
+        item.querySelector('.remove-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            item.classList.remove('selected');
+        });
+    });
+
+    // Foto de perfil: guardar imagen en localStorage
+    document.getElementById('upload-photo').addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file && currentUser) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const base64 = event.target.result;
+                localStorage.setItem(`photo_${currentUser.email}`, base64);
+                document.getElementById('profile-picture').src = base64;
+            };
+            reader.readAsDataURL(file);
         }
+    });
 
-        function handleRegister() {
-            const name = document.getElementById('register-name').value.trim();
-            const email = document.getElementById('register-email').value.trim();
-            const password = document.getElementById('register-password').value;
-            const role = document.getElementById('register-role').value;
-            const courses = getSelectedCourses();
-
-            let isValid = true;
-
-            // Reset error messages
-            document.getElementById('register-name-error').style.display = 'none';
-            document.getElementById('register-email-error').style.display = 'none';
-            document.getElementById('register-password-error').style.display = 'none';
-            document.getElementById('register-role-error').style.display = 'none';
-            document.getElementById('register-courses-error').style.display = 'none';
-
-            // Validation
-            if (!name) {
-                document.getElementById('register-name-error').style.display = 'block';
-                isValid = false;
-            }
-
-            const users = JSON.parse(localStorage.getItem('users'));
-            if (users.some(u => u.email === email)) {
-                document.getElementById('register-email-error').style.display = 'block';
-                isValid = false;
-            }
-
-            if (password.length < 6) {
-                document.getElementById('register-password-error').style.display = 'block';
-                isValid = false;
-            }
-
-            if (!role) {
-                document.getElementById('register-role-error').style.display = 'block';
-                isValid = false;
-            }
-
-            if (courses.length < 2 || courses.length > 6) {
-                document.getElementById('register-courses-error').style.display = 'block';
-                isValid = false;
-            }
-
-            if (isValid) {
-                const newUser = { name, email, password, role, courses };
-                users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
-                currentUser = newUser;
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                showAccountInfo();
-            }
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('currentUser');
-            currentUser = null;
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+        if (currentUser) {
+            showAccountInfo();
+        } else {
             showLoginForm();
         }
+    });
+</script>
 
-        // Course Selection Handling
-        document.querySelectorAll('.course-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                if (e.target.classList.contains('remove-btn')) return;
-                const selectedCourses = getSelectedCourses();
-                if (item.classList.contains('selected')) {
-                    item.classList.remove('selected');
-                } else if (selectedCourses.length < 6) {
-                    item.classList.add('selected');
-                }
-            });
-            item.querySelector('.remove-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
-                item.classList.remove('selected');
-            });
-        });
-
-        // Initialize Page
-        document.addEventListener('DOMContentLoaded', () => {
-            if (currentUser) {
-                showAccountInfo();
-            } else {
-                showLoginForm();
-            }
-        });
-    </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933bca51ca41bd1c',t:'MTc0NTIyNzA2Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

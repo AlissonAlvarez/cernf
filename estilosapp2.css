@@ -13,7 +13,7 @@
 }
 
 body {
-    padding: 0 !important;
+	margin: 0;
 	line-height: 1.5;
 	font-family: 'Poppins', sans-serif;
 	font-weight: 400;
@@ -33,24 +33,13 @@ body {
 }
 
 .header {
-	/* position: absolute; */
-	/* left: 0; */
+	position: absolute;
+	left: 0;
 	top: 0;
 	width: 100%;
-    /* height: 4vh; */
 	z-index: 99;
-    padding: 15px !important;
-	/* padding: 15px; */
+	padding: 15px;
 	background-color: #45AFFF;
-    margin-bottom: 40px;
-}
-
-.header-perfil {
-    height: 20vh;
-    background-color: #45AFFF;
-    margin-bottom: 40px;
-    top: 250px;
-     position: relative;
 }
 
 .header .row {
@@ -112,13 +101,6 @@ body {
 
 .logo_aplicacion {
   cursor: pointer;
-}
-
-.name {
-    font-size: 28px;
-    margin: 10px 0;
-    position: relative;
-    top: 15px;
 }
 
 
